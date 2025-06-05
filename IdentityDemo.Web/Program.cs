@@ -1,5 +1,6 @@
 ﻿using IdentityDemo.Application.Users;
 using IdentityDemo.Infrastructure.Persistence;
+using IdentityDemo.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddControllersWithViews();
         builder.Services.AddTransient<IUserService, UserService>();
+        builder.Services.AddTransient<IIdentityUserService, IdentityUserService>();
 
         // Identity: Registera identity-klasserna och vilken DbContext som ska användas
         builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
