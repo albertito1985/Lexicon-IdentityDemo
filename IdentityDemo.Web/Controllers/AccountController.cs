@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using IdentityDemo.Application.Users;
 using IdentityDemo.Application.Dtos;
 using IdentityDemo.Web.Views.Account;
+using Microsoft.AspNetCore.Authentication;
 
 namespace IdentityDemo.Web.Controllers;
 
@@ -14,6 +15,7 @@ public class AccountController(IUserService userService) : Controller
 {
     [HttpGet("")]
     [HttpGet("members")]
+    [Authorize]
     public IActionResult Members()
     {
         return View();
@@ -67,6 +69,16 @@ public class AccountController(IUserService userService) : Controller
         }
 
         // Redirect user
+        return RedirectToAction(nameof(Members));
+    }
+
+    [HttpPost("logout")]
+    [Authorize]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> LogoutAsync()
+    {
+        // Sign out user
+        await userService.SignOutAsync();
         return RedirectToAction(nameof(Members));
     }
 }

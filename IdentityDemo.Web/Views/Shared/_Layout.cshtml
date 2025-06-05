@@ -3,13 +3,23 @@
 <head>
     <meta charset="utf-8">
     <title>Identity Demo</title>
-    <link rel="stylesheet" href="https://unpkg.com/@@picocss/pico@@latest/css/pico.classless.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@@picocss/pico@latest/css/pico.classless.min.css">
 </head>
 <body style="padding: 1rem;">
     <nav>
         <a asp-controller="Account" asp-action="Members">Members</a>
-        <a asp-controller="Account" asp-action="Register">Register</a>
-        <a asp-controller="Account" asp-action="LogIn">Login</a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form asp-controller="Account" asp-action="Logout" method="post" style="display:inline;">
+                @Html.AntiForgeryToken()
+                <button type="submit" style="background:none;border:none;color:#0366d6;cursor:pointer;">Sign out</button>
+            </form>
+        }
+        else
+        {
+            <a asp-controller="Account" asp-action="Register">Register</a>
+            <a asp-controller="Account" asp-action="Login">Sign In</a>
+        }
     </nav>
     <br />
     <div>

@@ -37,5 +37,10 @@ namespace IdentityDemo.Infrastructure.Services
 
         }
 
+        public async Task SignOutAsync()
+        {
+            await signInManager.SignOutAsync();
+        }
+
     }
 }
