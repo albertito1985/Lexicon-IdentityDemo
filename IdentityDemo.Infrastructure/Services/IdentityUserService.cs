@@ -14,8 +14,8 @@ namespace IdentityDemo.Infrastructure.Services
     public class IdentityUserService
    (
    UserManager<ApplicationUser> userManager, // Hanterar användare
-   SignInManager<ApplicationUser> signInManager, // Hanterar inlogging
-   RoleManager<IdentityRole> roleManager // Hanterar roller
+   SignInManager<ApplicationUser> signInManager // Hanterar inlogging
+   //RoleManager<IdentityRole> roleManager // Hanterar roller
    ) : IIdentityUserService
     {
         public async Task<UserResultDto> CreateUserAsync(UserProfileDto user, string password)
