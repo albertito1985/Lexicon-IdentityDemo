@@ -7,5 +7,6 @@ namespace IdentityDemo.Web.Views.Account
 {
     public class MembersVM
     {
+
     }
 }

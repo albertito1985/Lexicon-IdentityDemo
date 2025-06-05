@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,13 +21,15 @@ namespace IdentityDemo.Infrastructure.Services
     {
         public async Task<UserResultDto> CreateUserAsync(UserProfileDto user, string password)
         {
-            var result = await userManager.CreateAsync(new ApplicationUser
+            var u = new ApplicationUser
             {
                 UserName = user.Email,
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName
-            }, password);
+            };
+            var result = await userManager.CreateAsync(u, password);
+            await userManager.AddClaimsAsync(u, [new Claim("Department", "IT")]);
             return new UserResultDto(result.Errors.FirstOrDefault()?.Description);
         }
 

@@ -18,7 +18,10 @@ public class AccountController(IUserService userService) : Controller
     [Authorize]
     public IActionResult Members()
     {
-        return View();
+        var department = User.FindFirst("Department")?.Value;
+        var shoeSize = User.FindFirst("ShoeSize")?.Value;
+
+        return View(department, shoeSize);
     }
 
     [HttpGet("register")]
