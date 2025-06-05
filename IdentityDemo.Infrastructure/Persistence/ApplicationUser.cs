@@ -12,7 +12,5 @@ namespace IdentityDemo.Infrastructure.Persistence
     {
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
-
-        public List<Claim> ClaimList { get; set; }
     }
 }

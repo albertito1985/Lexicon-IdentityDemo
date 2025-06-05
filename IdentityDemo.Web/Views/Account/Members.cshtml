@@ -2,7 +2,8 @@
 @if (User.Identity!.IsAuthenticated)
 {
     <p>
-        Welcome <strong>@User.Identity!.Name</strong>!
+        Welcome <strong>@User.Identity!.Name</strong>!<br/>
+        Your Department is <strong>@User.FindFirst("Department")?.Value</strong>
     </p>
 }
 else
